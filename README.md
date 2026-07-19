@@ -45,6 +45,8 @@ Sites 公网发布构建：
 pnpm run build:sites
 ```
 
+生产发布包包含 SPA 回退、Worker 入口与移动端媒体优化。
+
 ## 内容维护
 
 - 项目、简历、账号与中英文文案：`src/App.jsx`
