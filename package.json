@@ -1,0 +1,23 @@
+{
+  "name": "li-xiang-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:sites": "node scripts/clean-dist.mjs && vite build --config vite.sites.config.mjs && node scripts/prepare-sites-dist.mjs",
+    "test": "node scripts/verify.mjs",
+    "preview": "node scripts/serve-dist.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "5.0.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-icons": "^5.7.0",
+    "vite": "6.4.2"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.45.1"
+  }
+}
