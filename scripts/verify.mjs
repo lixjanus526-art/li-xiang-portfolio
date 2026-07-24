@@ -144,6 +144,13 @@ for (const requiredText of [
   "updateActiveSection",
   "SectionNav",
   "section-nav",
+  "story-statement",
+  "cinematic-frame",
+  "kinetic-title",
+  "让想象，",
+  "让故事",
+  "脱离画框",
+  "进入现场",
   "导演 · AI视觉总监",
   "AI设计师 · 执行者 · 摄影助理",
   "制作人",
@@ -182,6 +189,10 @@ assert(styleSource.includes(".interactive-cover"), "Missing immersive interactiv
 assert(styleSource.includes(".monitor-far-right"), "Missing far-right monitor layer");
 assert(styleSource.includes(".monitor-far-left"), "Missing far-left monitor layer");
 assert(styleSource.includes(".monitor-back"), "Missing back monitor layer");
+assert(styleSource.includes(".story-statement"), "Missing pinned scroll statement styles");
+assert(styleSource.includes(".cinematic-frame"), "Missing cinematic frame scroll styles");
+assert(styleSource.includes(".kinetic-title"), "Missing kinetic title scroll styles");
+assert(styleSource.includes("animation-timeline: view()"), "Missing scroll-linked selected-work frame reveal");
 assert(styleSource.includes("@media (hover: none), (pointer: coarse)"), "Missing coarse-pointer cover fallback");
 assert(styleSource.includes("@media (prefers-reduced-motion: reduce)"), "Missing reduced-motion fallback");
 assert(styleSource.includes("--page: #f5f4f8"), "Missing violet-white canvas token");

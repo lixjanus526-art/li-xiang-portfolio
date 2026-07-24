@@ -712,10 +712,10 @@ function MonitorRig({
   onSelectProject,
 }) {
   const videoRefs = useRef([]);
-  const shiftedProgress = reducedMotion ? 1 : clamp((progress - 0.3) / 0.2);
-  const scale = 1 - shiftedProgress * 0.27;
-  const shiftX = shiftedProgress * -18;
-  const shiftY = shiftedProgress * 1.5;
+  const rigExit = reducedMotion ? 0 : clamp((progress - 0.2) / 0.18);
+  const scale = 1 - rigExit * 0.12;
+  const shiftX = rigExit * -14;
+  const shiftY = rigExit * -2;
 
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
@@ -733,6 +733,7 @@ function MonitorRig({
       className="monitor-rig"
       style={{
         transform: `translate3d(calc(-50% + ${shiftX}vw), calc(-50% + ${shiftY}vh), 0) scale(${scale})`,
+        opacity: 1 - rigExit,
       }}
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
@@ -813,6 +814,7 @@ function MonitorRig({
 
 function ScrollStory({ onOpenProject, onNavigate }) {
   const storyRef = useRef(null);
+  const cinematicVideoRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverPaused, setHoverPaused] = useState(false);
@@ -872,6 +874,16 @@ function ScrollStory({ onOpenProject, onNavigate }) {
   };
 
   useEffect(() => {
+    const video = cinematicVideoRef.current;
+    if (!video) return;
+    if (inView && progress > 0.28 && progress < 0.9 && !reducedMotion) {
+      video.play().catch(() => undefined);
+    } else {
+      video.pause();
+    }
+  }, [activeIndex, inView, progress, reducedMotion]);
+
+  useEffect(() => {
     let animationFrame = 0;
     const updateProgress = () => {
       if (!storyRef.current) return;
@@ -896,11 +908,22 @@ function ScrollStory({ onOpenProject, onNavigate }) {
     };
   }, []);
 
-  const reveal = reducedMotion ? 1 : clamp((progress - 0.44) / 0.18);
-  const introFade = reducedMotion ? 0 : 1 - clamp((progress - 0.28) / 0.16);
-  const splitOpacity = reducedMotion ? 1 : clamp((progress - 0.35) / 0.12);
+  const introFade = reducedMotion ? 1 : 1 - clamp((progress - 0.17) / 0.12);
+  const statementReveal = reducedMotion ? 1 : clamp((progress - 0.14) / 0.11);
+  const statementExit = reducedMotion ? 0 : clamp((progress - 0.37) / 0.18);
+  const frameReveal = reducedMotion ? 1 : clamp((progress - 0.3) / 0.15);
+  const frameFill = reducedMotion ? 0 : clamp((progress - 0.46) / 0.2);
+  const kineticReveal = reducedMotion ? 0 : clamp((progress - 0.61) / 0.08);
+  const kineticScatter = reducedMotion ? 0 : clamp((progress - 0.7) / 0.14);
+  const frameExit = reducedMotion ? 0 : clamp((progress - 0.82) / 0.12);
+  const reveal = reducedMotion ? 1 : clamp((progress - 0.84) / 0.1);
+  const splitOpacity = reducedMotion ? 1 : clamp((progress - 0.83) / 0.08);
   const selectedProject = projects[activeIndex];
   const identityHidden = !mobileLayout && reveal < 0.08;
+  const frameScale = 0.82 + frameReveal * 0.18 + frameFill * 0.58 - frameExit * 0.42;
+  const frameRotate = (1 - frameReveal) * -5 + frameFill * 5;
+  const frameTranslateY = (1 - frameReveal) * 76;
+  const frameTranslateX = frameExit * -17;
 
   return (
     <section
@@ -921,15 +944,81 @@ function ScrollStory({ onOpenProject, onNavigate }) {
           </button>
         </div>
 
+        <div
+          className="story-statement"
+          style={{
+            opacity: statementReveal * (1 - statementExit),
+            transform: `translate3d(0, ${(1 - statementReveal) * 18 - statementExit * 12}vh, 0)`,
+          }}
+          aria-hidden={statementReveal < 0.08 || statementExit > 0.92}
+        >
+          <span className="story-statement-kicker">DIRECTING · AI VISUALS · PRODUCTION</span>
+          <p>
+            <span>让想象，</span>
+            <span>成为可以抵达的现场。</span>
+          </p>
+          <small>TURNING IMAGINATION INTO A PLACE YOU CAN ENTER.</small>
+        </div>
+
         <MonitorRig
           activeIndex={activeIndex}
-          inView={inView}
+          inView={inView && progress < 0.42}
           progress={progress}
           reducedMotion={reducedMotion}
           onHoverChange={setHoverPaused}
           onFocusChange={setFocusPaused}
           onSelectProject={selectProjectPreview}
         />
+
+        <button
+          className="cinematic-frame"
+          type="button"
+          onClick={() => onOpenProject(selectedProject)}
+          aria-label={`打开项目 ${selectedProject.title} / ${selectedProject.englishTitle}`}
+          aria-hidden={frameReveal < 0.08}
+          tabIndex={frameReveal > 0.1 || reducedMotion ? 0 : -1}
+          style={{
+            opacity: frameReveal,
+            borderRadius: `${Math.round((1 - frameFill) * 28)}px`,
+            transform: `translate3d(calc(-50% + ${frameTranslateX}vw), calc(-50% + ${frameTranslateY}vh), 0) rotate(${frameRotate}deg) scale(${frameScale})`,
+          }}
+        >
+          <video
+            ref={cinematicVideoRef}
+            key={selectedProject.slug}
+            src={selectedProject.overviewVideo}
+            poster={selectedProject.overviewPoster}
+            muted
+            loop
+            playsInline
+            preload={inView ? "auto" : "metadata"}
+          />
+          <span className="cinematic-frame-shade" aria-hidden="true" />
+          <span className="cinematic-frame-meta">
+            <span>{String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
+            <BilingualLabel zh={selectedProject.title} en={selectedProject.englishTitle} />
+            <span>VIEW PROJECT ↗</span>
+          </span>
+        </button>
+
+        <div
+          className="kinetic-title"
+          style={{ opacity: kineticReveal * (1 - frameExit) }}
+          aria-hidden="true"
+        >
+          <span style={{ transform: `translate3d(${-kineticScatter * 48}vw, 0, 0)` }}>让故事</span>
+          <span style={{ transform: `translate3d(${kineticScatter * 46}vw, 0, 0)` }}>脱离画框</span>
+          <span
+            className="kinetic-title-wide"
+            style={{
+              letterSpacing: `${kineticScatter * 0.32}em`,
+              transform: `scale(${1 + kineticScatter * 1.7})`,
+            }}
+          >
+            进入现场
+          </span>
+          <small>STORIES BREAK THE FRAME · ENTER THE SCENE</small>
+        </div>
 
         <div className="scroll-cue" style={{ opacity: introFade }}>
           <BilingualLabel zh="向下滚动" en="SCROLL TO REVEAL" />
@@ -940,7 +1029,7 @@ function ScrollStory({ onOpenProject, onNavigate }) {
 
         <section
           className="identity-panel"
-          style={{ opacity: reveal, transform: `translate3d(${(1 - reveal) * 42}px, 0, 0)` }}
+          style={{ opacity: reveal, transform: `translate3d(${(1 - reveal) * 54}px, 0, 0)` }}
           aria-hidden={identityHidden}
           inert={identityHidden}
         >

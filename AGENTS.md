@@ -8,6 +8,8 @@ Before substantial visual changes, use Product Design context and the latest use
 
 - The first viewport is anonymous and work-first. It must not reveal the name, portrait, school, contact details, roles, or biography.
 - The intro uses an interactive circular moving-image lens and six project previews. Scrolling reveals the layered monitor work index and personal information.
+- The portfolio scroll story uses three intentional phases: a pinned bilingual statement, a real-video frame that rotates and expands toward full viewport, and kinetic typography that separates before the personal-information panel arrives.
+- Selected-work media frames enter with alternating scroll-linked offsets and rotation. Mobile keeps the same narrative with lower motion intensity, and reduced-motion mode presents every phase as a readable static sequence.
 - The personal portrait is a small framed image in the upper third, never a full-height hero cutout.
 - The plan section is `个人计划与学习目的 / PLAN & LEARNING GOALS` and includes: 2028 master's application and portfolio preparation, live-action production combined with AI, and AI-powered personal-IP/social-media creation.
 - The selected visual system is a white/light-gray editorial canvas with near-black media frames and `#6643FF` violet interaction accents.
