@@ -609,8 +609,8 @@ a {
   position: absolute;
   z-index: 16;
   left: clamp(28px, 5vw, 82px);
-  bottom: 10vh;
-  width: min(760px, 53vw);
+  bottom: 11vh;
+  width: min(1120px, 78vw);
   color: var(--ink);
   pointer-events: none;
   will-change: opacity, transform;
@@ -627,15 +627,17 @@ a {
 .story-statement p {
   display: flex;
   flex-direction: column;
+  gap: clamp(18px, 2.4vh, 30px);
   margin: 0;
-  font-size: clamp(52px, 7.3vw, 126px);
+  font-size: clamp(52px, 6.25vw, 108px);
   font-weight: 600;
-  line-height: 0.9;
-  letter-spacing: -0.075em;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
 }
 
 .story-statement p span:last-child {
-  margin-left: clamp(30px, 7vw, 120px);
+  margin-left: clamp(72px, 9vw, 154px);
+  white-space: nowrap;
 }
 
 .story-statement small {
@@ -985,6 +987,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: clamp(18px, 2.2vh, 30px);
   color: #fff;
   pointer-events: none;
   text-align: center;
@@ -995,10 +998,22 @@ a {
   display: block;
   font-size: clamp(56px, 8.2vw, 140px);
   font-weight: 600;
-  line-height: 0.84;
-  letter-spacing: -0.075em;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
   white-space: nowrap;
   will-change: transform, letter-spacing;
+}
+
+.kinetic-title > span:nth-child(1) {
+  margin-right: clamp(80px, 13vw, 220px);
+}
+
+.kinetic-title > span:nth-child(2) {
+  margin-left: clamp(96px, 15vw, 252px);
+}
+
+.kinetic-title > span:nth-child(3) {
+  margin-right: clamp(24px, 4vw, 72px);
 }
 
 .kinetic-title-wide {
@@ -1006,7 +1021,7 @@ a {
 }
 
 .kinetic-title small {
-  margin-top: 34px;
+  margin-top: 20px;
   font-size: 10px;
   letter-spacing: 0.18em;
 }
@@ -2696,11 +2711,13 @@ a {
 
   .story-statement p {
     font-size: clamp(50px, 15vw, 72px);
-    line-height: 0.94;
+    gap: 14px;
+    line-height: 0.98;
   }
 
   .story-statement p span:last-child {
     margin: 0;
+    white-space: normal;
   }
 
   .intro-title {
@@ -2759,6 +2776,7 @@ a {
     position: relative;
     inset: auto;
     align-items: flex-start;
+    gap: 14px;
     min-height: 74svh;
     padding: 14vh 22px 18vh;
     background: var(--page);
@@ -2770,7 +2788,7 @@ a {
 
   .kinetic-title > span {
     font-size: clamp(52px, 16vw, 78px);
-    line-height: 0.9;
+    line-height: 0.94;
     transform: none !important;
     white-space: normal;
     animation: mobileKineticReveal both linear;
@@ -2778,7 +2796,15 @@ a {
     animation-range: entry 4% cover 34%;
   }
 
+  .kinetic-title > span:nth-child(1),
+  .kinetic-title > span:nth-child(2),
+  .kinetic-title > span:nth-child(3) {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .kinetic-title small {
+    margin-top: 18px;
     color: var(--cyan);
     line-height: 1.5;
   }

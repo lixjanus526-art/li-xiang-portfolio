@@ -192,6 +192,13 @@ assert(styleSource.includes(".monitor-back"), "Missing back monitor layer");
 assert(styleSource.includes(".story-statement"), "Missing pinned scroll statement styles");
 assert(styleSource.includes(".cinematic-frame"), "Missing cinematic frame scroll styles");
 assert(styleSource.includes(".kinetic-title"), "Missing kinetic title scroll styles");
+assert(styleSource.includes("width: min(1120px, 78vw)"), "Pinned statement must retain its open two-line desktop measure");
+assert(styleSource.includes("gap: clamp(18px, 2.4vh, 30px)"), "Pinned statement must retain its expanded vertical rhythm");
+assert(styleSource.includes(".kinetic-title > span:nth-child(2)"), "Kinetic title must retain deliberate horizontal staggering");
+assert(
+  styleSource.includes(".kinetic-title > span:nth-child(3) {\n    margin-right: 0;\n    margin-left: 0;"),
+  "Mobile kinetic title must remove desktop offsets to prevent mid-word wrapping",
+);
 assert(styleSource.includes("animation-timeline: view()"), "Missing scroll-linked selected-work frame reveal");
 assert(styleSource.includes("@media (hover: none), (pointer: coarse)"), "Missing coarse-pointer cover fallback");
 assert(styleSource.includes("@media (prefers-reduced-motion: reduce)"), "Missing reduced-motion fallback");

@@ -15,10 +15,16 @@
   - `qa/motion-scroll/implementation-mobile-01-story.png`
   - `qa/motion-scroll/implementation-mobile-02-frame.png`
   - `qa/motion-scroll/implementation-mobile-04-selected-work.png`
+  - `qa/motion-scroll/implementation-03-statement-spacing.png`
+  - `qa/motion-scroll/implementation-04-kinetic-spacing.png`
+  - `qa/motion-scroll/implementation-mobile-05-statement-spacing.png`
+  - `qa/motion-scroll/implementation-mobile-06-kinetic-spacing.png`
 - Side-by-side comparison evidence:
   - `qa/motion-scroll/comparison-00-statement.jpg`
   - `qa/motion-scroll/comparison-01-frame-expansion.jpg`
   - `qa/motion-scroll/comparison-02-kinetic-type.jpg`
+  - `qa/motion-scroll/comparison-03-statement-spacing.jpg`
+  - `qa/motion-scroll/comparison-04-kinetic-spacing.jpg`
 
 ## Viewport and normalization
 
@@ -65,11 +71,20 @@ No actionable P0, P1, or P2 findings remain.
 - Fix: added standards-based and WebKit scrollbar hiding while preserving `overflow-x: auto`.
 - Post-fix evidence: `implementation-mobile-04-selected-work.png`; computed `scrollbar-width` is `none`, and the filter remains horizontally scrollable.
 
+### Iteration 3
+
+- Earlier P1: the pinned statement wrapped into three dense lines at the annotated desktop state, making the message feel closed and visually congested.
+- Fix: widened the statement field from `53vw` to `78vw`, reduced the display scale, opened the line-height and inter-line gap, and preserved a deliberate second-line offset. The sentence now resolves as two stable editorial lines at the inspected desktop viewport.
+- Earlier P1: the three-line kinetic title used an excessively compressed line-height and shared center axis, so the lines visually collapsed into one block.
+- Fix: increased vertical rhythm, loosened tracking, and introduced controlled per-line horizontal offsets while keeping the scroll-driven split motion. Mobile explicitly removes those offsets so `脱离画框` no longer breaks mid-word.
+- Post-fix evidence: `comparison-03-statement-spacing.jpg`, `comparison-04-kinetic-spacing.jpg`, `implementation-mobile-05-statement-spacing.png`, and `implementation-mobile-06-kinetic-spacing.png`.
+
 ## Focused region evidence
 
 - Display frame: the full frame region was compared in `comparison-01-frame-expansion.jpg`; crop, rounded-to-full expansion, rotation, real-video quality, and frame metadata are readable at the selected state.
-- Kinetic title: the title region was compared in `comparison-02-kinetic-type.jpg`; three-line scale, overlap, contrast, split direction, and relationship to the moving subject are legible without a separate crop.
-- Mobile: `implementation-mobile-01-story.png` and `implementation-mobile-02-frame.png` provide focused evidence for text wrapping, frame margins, media crop, and caption placement.
+- Statement typography: `comparison-03-statement-spacing.jpg` confirms the annotated message now holds two open lines with a wider text field and more surrounding whitespace.
+- Kinetic title: `comparison-04-kinetic-spacing.jpg` confirms the three lines use distinct vertical and horizontal positions while retaining contrast, split direction, and relationship to the moving subject.
+- Mobile: `implementation-mobile-05-statement-spacing.png` and `implementation-mobile-06-kinetic-spacing.png` provide focused evidence for text wrapping, safe offsets, frame margins, media crop, and caption placement.
 
 ## Primary interactions tested
 
