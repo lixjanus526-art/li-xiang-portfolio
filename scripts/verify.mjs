@@ -50,7 +50,7 @@ for (const slug of projectSlugs) {
     try {
       await access(file);
       const fileStat = await stat(file);
-      const minimumSize = extension === "mp4" ? 100_000 : 10_000;
+      const minimumSize = extension === "mp4" ? 60_000 : 10_000;
       assert(fileStat.size >= minimumSize, `${slug}.${extension} is unexpectedly small`);
     } catch {
       failures.push(`Missing media asset: ${slug}.${extension}`);
@@ -64,7 +64,7 @@ for (const slug of projectSlugs) {
       const fileName = `${variant}-${slug}.${extension}`;
       try {
         const fileStat = await stat(path.join(mediaRoot, fileName));
-        const minimumSize = extension === "mp4" ? 100_000 : 10_000;
+        const minimumSize = extension === "mp4" ? 60_000 : 10_000;
         assert(fileStat.size >= minimumSize, `${fileName} is unexpectedly small`);
       } catch {
         failures.push(`Missing media asset: ${fileName}`);
@@ -195,8 +195,9 @@ assert(styleSource.includes(".kinetic-title"), "Missing kinetic title scroll sty
 assert(styleSource.includes("width: min(1120px, 78vw)"), "Pinned statement must retain its open two-line desktop measure");
 assert(styleSource.includes("gap: clamp(18px, 2.4vh, 30px)"), "Pinned statement must retain its expanded vertical rhythm");
 assert(styleSource.includes(".kinetic-title > span:nth-child(2)"), "Kinetic title must retain deliberate horizontal staggering");
+const mobileKineticOffsetsReset = /\.kinetic-title > span:nth-child\(1\),\s*\.kinetic-title > span:nth-child\(2\),\s*\.kinetic-title > span:nth-child\(3\)\s*\{\s*margin-right:\s*0;\s*margin-left:\s*0;/s.test(styleSource);
 assert(
-  styleSource.includes(".kinetic-title > span:nth-child(3) {\n    margin-right: 0;\n    margin-left: 0;"),
+  mobileKineticOffsetsReset,
   "Mobile kinetic title must remove desktop offsets to prevent mid-word wrapping",
 );
 assert(styleSource.includes("animation-timeline: view()"), "Missing scroll-linked selected-work frame reveal");

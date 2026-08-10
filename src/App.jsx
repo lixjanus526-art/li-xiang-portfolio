@@ -645,7 +645,7 @@ function SectionNav() {
     { id: "about", zh: "个人介绍", en: "ABOUT" },
     { id: "capabilities", zh: "专业技能", en: "CAPABILITIES" },
     { id: "social", zh: "社交主页", en: "SOCIAL" },
-    { id: "contact", zh: "联系", en: "CONTACT" },
+    { id: "contact", zh: "联系方式", en: "CONTACT" },
   ];
   const [active, setActive] = useState("portfolio");
 
