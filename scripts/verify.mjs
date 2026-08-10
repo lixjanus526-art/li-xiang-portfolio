@@ -92,6 +92,7 @@ try {
 const appSource = await readFile(path.join(root, "src", "App.jsx"), "utf8");
 const styleSource = await readFile(path.join(root, "src", "styles.css"), "utf8");
 const indexSource = await readFile(path.join(root, "index.html"), "utf8");
+const prepareSitesSource = await readFile(path.join(root, "scripts", "prepare-sites-dist.mjs"), "utf8");
 const hostingConfig = JSON.parse(await readFile(path.join(root, ".openai", "hosting.json"), "utf8"));
 
 for (const requiredText of [
@@ -192,9 +193,40 @@ assert(styleSource.includes(".monitor-back"), "Missing back monitor layer");
 assert(styleSource.includes(".story-statement"), "Missing pinned scroll statement styles");
 assert(styleSource.includes(".cinematic-frame"), "Missing cinematic frame scroll styles");
 assert(styleSource.includes(".kinetic-title"), "Missing kinetic title scroll styles");
-assert(styleSource.includes("width: min(1120px, 78vw)"), "Pinned statement must retain its open two-line desktop measure");
-assert(styleSource.includes("gap: clamp(18px, 2.4vh, 30px)"), "Pinned statement must retain its expanded vertical rhythm");
+assert(
+  /\.evaluation-copy\s*\{[^}]*text-align:\s*left;/s.test(styleSource),
+  "Self-evaluation copy must share one left-aligned text baseline",
+);
+assert(
+  !/\.evaluation-list article:nth-child\([23]\) \.evaluation-copy/.test(styleSource),
+  "Self-evaluation rows must not use per-row horizontal offsets",
+);
+assert(
+  /\.capability-card\s*\{[^}]*min-height:\s*520px;/s.test(styleSource),
+  "Capability cards must share one desktop height",
+);
+assert(
+  /@media \(max-width: 767px\)[\s\S]*?\.capability-card\s*\{[^}]*min-height:\s*450px;/s.test(styleSource),
+  "Capability cards must share one mobile height",
+);
+assert(
+  /\.capability-title \.bilingual-zh\s*\{[^}]*white-space:\s*nowrap;/s.test(styleSource)
+    && /\.capability-title \.bilingual-en\s*\{[^}]*white-space:\s*nowrap;/s.test(styleSource),
+  "Capability card titles must use consistent single-line bilingual headings",
+);
+assert(
+  !/\.capability-card:nth-child\(6\) \.capability-title/.test(styleSource),
+  "The final capability card must use the same title rhythm as the other cards",
+);
+assert(
+  /\.capability-title\s*\{[^}]*margin-top:\s*0;/s.test(styleSource),
+  "Capability titles must start from one fixed internal baseline",
+);
+assert(styleSource.includes("width: min(1240px, 84vw)"), "Pinned statement must retain its open two-line desktop measure");
+assert(styleSource.includes("gap: clamp(30px, 4.5vh, 56px)"), "Pinned statement must retain its expanded vertical rhythm");
 assert(styleSource.includes(".kinetic-title > span:nth-child(2)"), "Kinetic title must retain deliberate horizontal staggering");
+assert(appSource.includes("progress - 0.12) / 0.09"), "Intro copy must clear before the statement becomes dominant");
+assert(appSource.includes("kineticScatter * 0.75"), "The third kinetic line must not scale back into the line above it");
 const mobileKineticOffsetsReset = /\.kinetic-title > span:nth-child\(1\),\s*\.kinetic-title > span:nth-child\(2\),\s*\.kinetic-title > span:nth-child\(3\)\s*\{\s*margin-right:\s*0;\s*margin-left:\s*0;/s.test(styleSource);
 assert(
   mobileKineticOffsetsReset,
@@ -203,6 +235,11 @@ assert(
 assert(styleSource.includes("animation-timeline: view()"), "Missing scroll-linked selected-work frame reveal");
 assert(styleSource.includes("@media (hover: none), (pointer: coarse)"), "Missing coarse-pointer cover fallback");
 assert(styleSource.includes("@media (prefers-reduced-motion: reduce)"), "Missing reduced-motion fallback");
+assert(
+  ["rain-beast-fight.mp4", "social-ai-craft.mp4", "social-city-stories.mp4", "social-field-notes.mp4"]
+    .every((file) => prepareSitesSource.includes(file)),
+  "Sites build must exclude media that the application never requests",
+);
 assert(styleSource.includes("--page: #f5f4f8"), "Missing violet-white canvas token");
 assert(styleSource.includes("--surface: #0a0910"), "Missing near-black media-frame token");
 assert(styleSource.includes("--cyan: #6643ff"), "Missing violet interaction token");

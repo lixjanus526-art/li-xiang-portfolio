@@ -609,8 +609,8 @@ a {
   position: absolute;
   z-index: 16;
   left: clamp(28px, 5vw, 82px);
-  bottom: 11vh;
-  width: min(1120px, 78vw);
+  bottom: 9vh;
+  width: min(1240px, 84vw);
   color: var(--ink);
   pointer-events: none;
   will-change: opacity, transform;
@@ -627,16 +627,16 @@ a {
 .story-statement p {
   display: flex;
   flex-direction: column;
-  gap: clamp(18px, 2.4vh, 30px);
+  gap: clamp(30px, 4.5vh, 56px);
   margin: 0;
-  font-size: clamp(52px, 6.25vw, 108px);
+  font-size: clamp(50px, 5.6vw, 96px);
   font-weight: 600;
-  line-height: 0.96;
-  letter-spacing: -0.055em;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
 }
 
 .story-statement p span:last-child {
-  margin-left: clamp(72px, 9vw, 154px);
+  margin-left: clamp(96px, 13vw, 220px);
   white-space: nowrap;
 }
 
@@ -987,7 +987,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(18px, 2.2vh, 30px);
+  gap: clamp(30px, 4.4vh, 52px);
   color: #fff;
   pointer-events: none;
   text-align: center;
@@ -996,32 +996,32 @@ a {
 
 .kinetic-title > span {
   display: block;
-  font-size: clamp(56px, 8.2vw, 140px);
+  font-size: clamp(52px, 6.9vw, 118px);
   font-weight: 600;
-  line-height: 0.9;
-  letter-spacing: -0.055em;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
   white-space: nowrap;
   will-change: transform, letter-spacing;
 }
 
 .kinetic-title > span:nth-child(1) {
-  margin-right: clamp(80px, 13vw, 220px);
+  margin-right: clamp(112px, 17vw, 288px);
 }
 
 .kinetic-title > span:nth-child(2) {
-  margin-left: clamp(96px, 15vw, 252px);
+  margin-left: clamp(132px, 20vw, 336px);
 }
 
 .kinetic-title > span:nth-child(3) {
-  margin-right: clamp(24px, 4vw, 72px);
+  margin-right: clamp(56px, 8vw, 136px);
 }
 
 .kinetic-title-wide {
-  transform-origin: center;
+  transform-origin: top center;
 }
 
 .kinetic-title small {
-  margin-top: 20px;
+  margin-top: 12px;
   font-size: 10px;
   letter-spacing: 0.18em;
 }
@@ -1633,15 +1633,7 @@ a {
 
 .evaluation-copy {
   min-width: 0;
-}
-
-.evaluation-list article:nth-child(2) .evaluation-copy {
-  padding-left: clamp(0px, 4vw, 72px);
-}
-
-.evaluation-list article:nth-child(3) .evaluation-copy {
-  max-width: 92%;
-  padding-left: clamp(0px, 1.8vw, 32px);
+  text-align: left;
 }
 
 .evaluation-headline {
@@ -1747,7 +1739,7 @@ a {
 
 .capability-card {
   grid-column: span 4;
-  min-height: 390px;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   padding: clamp(26px, 3vw, 48px);
@@ -1760,17 +1752,14 @@ a {
 
 .capability-card:nth-child(1) {
   grid-column: span 7;
-  min-height: 520px;
 }
 
 .capability-card:nth-child(2) {
   grid-column: span 5;
-  min-height: 520px;
 }
 
 .capability-card:nth-child(6) {
   grid-column: span 12;
-  min-height: 300px;
 }
 
 .capability-card:hover {
@@ -1797,11 +1786,23 @@ a {
 }
 
 .capability-title {
-  margin-top: auto;
+  margin-top: 0;
   padding-top: 56px;
-  font-size: clamp(38px, 4vw, 70px);
+  font-size: clamp(32px, 2.8vw, 70px);
   font-weight: 800;
   letter-spacing: -0.065em;
+}
+
+.capability-title .bilingual-zh {
+  white-space: nowrap;
+}
+
+.capability-title .bilingual-en {
+  width: 100%;
+  font-size: clamp(14px, 1.1vw, 30px);
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .capability-title .bilingual-en,
@@ -1829,10 +1830,6 @@ a {
 .capability-card .english-copy {
   margin-top: 10px;
   font-size: 12px !important;
-}
-
-.capability-card:nth-child(6) .capability-title {
-  margin-top: 0;
 }
 
 .toolkit-panel {
@@ -2957,12 +2954,6 @@ a {
     gap: 14px;
   }
 
-  .evaluation-list article:nth-child(2) .evaluation-copy,
-  .evaluation-list article:nth-child(3) .evaluation-copy {
-    max-width: none;
-    padding-left: 0;
-  }
-
   .evaluation-headline,
   .evaluation-list article:nth-child(2) .evaluation-headline,
   .evaluation-list article:nth-child(3) .evaluation-headline {
@@ -2988,13 +2979,18 @@ a {
 
   .capability-card {
     grid-column: 1 / -1 !important;
-    min-height: 330px;
+    min-height: 450px;
     padding: 28px 22px;
   }
 
   .capability-title {
     padding-top: 42px;
-    font-size: 42px;
+    font-size: clamp(30px, 8.5vw, 38px);
+  }
+
+  .capability-title .bilingual-en {
+    font-size: clamp(12px, 3.5vw, 14px);
+    letter-spacing: 0.06em;
   }
 
   .capability-card > p {

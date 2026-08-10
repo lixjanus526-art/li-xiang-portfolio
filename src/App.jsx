@@ -908,7 +908,7 @@ function ScrollStory({ onOpenProject, onNavigate }) {
     };
   }, []);
 
-  const introFade = reducedMotion ? 1 : 1 - clamp((progress - 0.17) / 0.12);
+  const introFade = reducedMotion ? 1 : 1 - clamp((progress - 0.12) / 0.09);
   const statementReveal = reducedMotion ? 1 : clamp((progress - 0.14) / 0.11);
   const statementExit = reducedMotion ? 0 : clamp((progress - 0.37) / 0.18);
   const frameReveal = reducedMotion ? 1 : clamp((progress - 0.3) / 0.15);
@@ -1011,8 +1011,8 @@ function ScrollStory({ onOpenProject, onNavigate }) {
           <span
             className="kinetic-title-wide"
             style={{
-              letterSpacing: `${kineticScatter * 0.32}em`,
-              transform: `scale(${1 + kineticScatter * 1.7})`,
+              letterSpacing: `${kineticScatter * 0.22}em`,
+              transform: `scale(${1 + kineticScatter * 0.75})`,
             }}
           >
             进入现场

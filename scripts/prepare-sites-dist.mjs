@@ -1,4 +1,4 @@
-import { access, copyFile, mkdir } from "node:fs/promises";
+import { access, copyFile, mkdir, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = process.cwd();
@@ -35,4 +35,16 @@ await copyFile(workerEntry, resolve(serverDirectory, "index.js"));
 await copyFile(
   resolve(root, ".openai", "hosting.json"),
   resolve(hostingDirectory, "hosting.json"),
+);
+
+const unusedHostedMedia = [
+  "rain-beast-fight.jpg",
+  "rain-beast-fight.mp4",
+  "social-ai-craft.mp4",
+  "social-city-stories.mp4",
+  "social-field-notes.mp4",
+];
+
+await Promise.all(
+  unusedHostedMedia.map((file) => rm(resolve(root, "dist", "client", "media", file), { force: true })),
 );
