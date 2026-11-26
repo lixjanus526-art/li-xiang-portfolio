@@ -91,6 +91,25 @@ const projects = [
 
 const PROJECT_PREVIEW_INTERVAL = 8000;
 
+const selectedProjects = [
+  ...projects,
+  {
+    slug: "xiaoban",
+    title: "小半",
+    englishTitle: "XIAOBAN",
+    type: "音乐录像",
+    englishType: "MUSIC VIDEO",
+    role: "剪辑 · 混音 · 后期包装",
+    englishRole: "EDITING · SOUND MIXING · POST-PRODUCTION FINISHING",
+    description: "用教室、走廊与放学后的片段剪成一支校园 MV。我负责剪辑、混音和全部后期包装，原始素材由他人拍摄。",
+    englishDescription: "Classrooms, corridors and moments after school come together in this music video. I handled editing, sound mixing and all post-production finishing using footage shot by others.",
+    poster: "/media/xiaoban.jpg",
+    video: "/media/xiaoban.mp4",
+    selectedPoster: "/media/xiaoban.jpg",
+    selectedVideo: "/media/selected-xiaoban.mp4",
+  },
+];
+
 const socialProfiles = [
   {
     platform: "小红书",
@@ -1101,7 +1120,7 @@ function ProjectArchive({ onOpenProject }) {
     return () => mediaQuery.removeEventListener("change", updatePreference);
   }, []);
 
-  const visibleProjects = useMemo(() => projects.filter((project) => {
+  const visibleProjects = useMemo(() => selectedProjects.filter((project) => {
     if (filter === "all") return true;
     if (filter === "narrative") return ["rain-beast", "invisible-shield", "xiu-mian"].includes(project.slug);
     if (filter === "ai") return ["rain-beast", "tao-gu", "silent-embrace"].includes(project.slug);
@@ -1115,7 +1134,7 @@ function ProjectArchive({ onOpenProject }) {
           <span className="section-index">02 / 06</span>
           <BilingualLabel zh="精选作品" en="SELECTED WORKS" className="section-title" />
         </div>
-        <p>从导演、AI 视觉到制片与现场执行，按项目查看真实职责与公开预览。</p>
+        <p>从导演、AI 视觉到剪辑与混音，按项目查看创作分工与作品。</p>
       </header>
 
       <div className="filter-bar" role="group" aria-label="作品分类">
@@ -1444,7 +1463,7 @@ function ProjectDialog({ project, onClose }) {
     >
       <button className="dialog-close" type="button" onClick={() => dialogRef.current?.close()}>关闭 / CLOSE</button>
       <div className="dialog-media">
-        <video src={project.video} poster={project.poster} controls autoPlay muted playsInline />
+            <video src={project.video} poster={project.poster} controls autoPlay={project.slug !== "xiaoban"} muted={project.slug !== "xiaoban"} playsInline preload="metadata" />
       </div>
       <div className="dialog-content">
         <BilingualLabel zh={project.title} en={project.englishTitle} className="dialog-title" />
