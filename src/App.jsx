@@ -119,8 +119,7 @@ const socialProfiles = [
     handle: "4147214699",
     focus: "AI影像 · 摄影纪实 · 学习记录",
     englishFocus: "AI VISUALS · PHOTOGRAPHY · LEARNING NOTES",
-    instruction: "复制账号后，在小红书 App 内搜索",
-    englishInstruction: "COPY THE ID AND SEARCH IN THE REDNOTE APP",
+    href: "https://xhslink.cn/o/8xSP6nFlQzz",
     accent: "#6643ff",
     cover: "/media/social-rednote-cover.jpg",
     detail: "/media/social-rednote-detail.jpg",
@@ -134,8 +133,7 @@ const socialProfiles = [
     handle: "21091L",
     focus: "AIGC · 英语 · 运动 · 城市内容",
     englishFocus: "AIGC · ENGLISH · SPORTS · CITY STORIES",
-    instruction: "复制账号后，在抖音 App 内搜索",
-    englishInstruction: "COPY THE ID AND SEARCH IN THE DOUYIN APP",
+    href: "https://v.douyin.com/yXAisZNhWkc/",
     accent: "#8368ff",
     cover: "/media/social-douyin-cover.jpg",
     detail: "/media/social-douyin-detail.jpg",
@@ -149,8 +147,6 @@ const socialProfiles = [
     handle: "@Januslixxx23",
     focus: "影视观察 · AIGC · 策划与作品集",
     englishFocus: "FILM NOTES · AIGC · CREATIVE PORTFOLIO",
-    instruction: "打开公开主页",
-    englishInstruction: "OPEN THE PUBLIC PROFILE",
     href: "https://x.com/Januslixxx23",
     accent: "#b7aaff",
     cover: "/media/social-x-cover.jpg",
@@ -1203,8 +1199,15 @@ function AboutSection({ onNavigate }) {
           <img src="/media/portrait.jpg" alt="李想半身形象照" />
         </figure>
         <div className="about-statement">
-          <p>以导演思维统筹叙事，以 AI 视觉拓展世界，并从制片到现场执行把创意可靠落地。</p>
-          <p className="english-copy" lang="en">I shape stories with a director's eye, extend them through AI visuals, and carry ideas into dependable production.</p>
+          <p className="about-intro" lang="zh-CN">
+            <span>以导演思维讲故事</span>
+            <span>用 AI 拓展影像表达</span>{" "}
+            <span>从制片到现场让创意落地</span>
+          </p>
+          <p className="english-copy" lang="en">
+            I shape stories as a director<br />
+            I explore new visuals with AI and bring ideas to life from planning to the shoot
+          </p>
         </div>
         <dl className="about-facts">
           <div>
@@ -1418,14 +1421,10 @@ function SocialSection() {
               <button type="button" onClick={() => copyHandle(profile)}>
                 {copied === profile.platform ? "已复制 / COPIED" : "复制账号 / COPY ID"}
               </button>
-              {profile.href ? (
-                <a href={profile.href} target="_blank" rel="noreferrer">
-                  打开主页 / OPEN PROFILE
-                  <span className="visually-hidden">（新窗口打开）</span>
-                </a>
-              ) : (
-                <span><BilingualLabel zh={profile.instruction} en={profile.englishInstruction} /></span>
-              )}
+              <a href={profile.href} target="_blank" rel="noopener noreferrer">
+                打开主页 / OPEN PROFILE
+                <span className="visually-hidden">（{profile.platform} · {profile.name}，新窗口打开）</span>
+              </a>
             </div>
           </article>
         ))}

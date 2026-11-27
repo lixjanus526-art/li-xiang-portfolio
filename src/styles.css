@@ -1488,11 +1488,37 @@ a {
   object-position: center 19%;
 }
 
+.about-statement {
+  min-width: 0;
+  container-type: inline-size;
+}
+
 .about-statement p {
   margin: 0;
-  font-size: clamp(27px, 3.1vw, 52px);
-  line-height: 1.22;
-  letter-spacing: -0.04em;
+}
+
+.about-intro {
+  font-size: min(42px, 4.9cqi);
+  line-height: 1.48;
+  letter-spacing: -0.025em;
+}
+
+.about-intro span {
+  white-space: nowrap;
+}
+
+.about-intro span:first-child {
+  display: block;
+}
+
+@container (max-width: 410px) {
+  .about-intro {
+    font-size: min(29px, 8.6cqi);
+  }
+
+  .about-intro span {
+    display: block;
+  }
 }
 
 .about-statement .english-copy {
@@ -2915,10 +2941,6 @@ a {
     gap: 22px;
   }
 
-  .about-statement p {
-    font-size: 25px;
-  }
-
   .about-facts {
     grid-column: 1 / -1;
   }
@@ -3106,6 +3128,12 @@ a {
 
   .social-profile h2 {
     font-size: 42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-statement {
+    grid-column: 1 / -1;
   }
 }
 

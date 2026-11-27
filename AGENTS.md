@@ -19,6 +19,8 @@ Before substantial visual changes, use Product Design context and the latest use
 - Professional Skills includes post-production/DIT, generative-AI workflows, video/animation generation, visual/audio assets, LLM/research practice, and English/cross-cultural communication.
 - The Professional Skills section is a dark visual stage with oversized, thumbnail-readable hierarchy, staggered capability cards, and a real icon-library toolkit wall for Claude, DaVinci Resolve, Codex, ChatGPT, Gemini, Kling AI, Jimeng AI, Lovart, and Suno.
 - Social screenshots must never be embedded. Extracted Xiaohongshu, Douyin, and X information belongs in the integrated Social Desk section on the main scrolling page.
+- Each social card keeps its account ID visible and stacks two actions in order: copy the account ID, then open the creator's profile in a new tab.
 - The Social Desk uses dedicated still images that do not repeat homepage posters. Its three creative-scene images are Jinan TV studio work, Xiu Mian on-set camera work, and visual motion capture.
 - `静默防线 / THE INVISIBLE SHIELD` remains in the portfolio and identifies the role as Producer.
 - Chinese copy is visually larger; the English translation sits directly beneath it.
+- The About introduction uses punctuation-free phrases in two left-aligned lines, short then long. Narrow columns use three progressively longer lines.
